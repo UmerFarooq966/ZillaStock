@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Image;
 use App\Models\imagecategory;
 use Illuminate\Http\Request;
 
@@ -16,18 +17,13 @@ class ImageCategoryController extends Controller
     public function index()
     {
 
-        if (auth()->user()->role == 'admin')
-    {
-        $Imagecategorys = imagecategory::all();
+        if (auth()->user()->role == 'admin') {
+            $Imagecategorys = ImageCategory::with('images')->get();
 
-        return view('Admin/ImageCategory/index')->with('Imagecategorys',$Imagecategorys);
-    }
-        elseif (auth()->user()->role == 'editor')
-        {
+            return view('Admin.ImageCategory.index')->with('Imagecategorys', $Imagecategorys);
+        } elseif (auth()->user()->role == 'editor') {
             return redirect()->route('editor.home');
-        }
-        else
-        {
+        } else {
             return redirect()->route('home');
         }
 
@@ -81,7 +77,11 @@ class ImageCategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $category = ImageCategory::findOrFail($id);
+        $images = Image::where('catid', $category->id)->get();
+        $Imagecategorys = ImageCategory::with('images')->get(); // Add this line to fetch the categories
+
+        return view('Admin.ImageCategory.index', compact('category', 'images', 'Imagecategorys'));
     }
 
     /**
@@ -93,8 +93,21 @@ class ImageCategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = ImageCategory::findOrFail($id);
+
+        if ($category->images()->count() === 0) {
+            return redirect()->route('ImageCategory.edit', $category)
+                ->with('error', 'No images in this category to update prices.');
+        }
+
+        $price = $request->input('price');
+
+        $category->images()->update(['price' => $price]);
+
+        return redirect()->route('ImageCategory.edit', $category)
+            ->with('success', 'Image prices updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -21,7 +21,8 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../CSS/buyimg.css">
-    <link rel="stylesheet" type="text/css" href="../CSS/indexbg.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/indexbg.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
 
 
@@ -47,7 +48,7 @@
 </head>
 <body>
 
-@include('Buyer.B-layouts.partials.gallery')
+
 
 
 

@@ -13,7 +13,17 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $this->middleware(['auth'=>'verified']);
+    }
 
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function Home()
+    {
+        return redirect()->route('homee');
     }
 
     /**
@@ -21,21 +31,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function userHome()
+    public function teamHome()
     {
-        return view('index');
+        return view('..Team/T-dashboard');
     }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    public function editorHome()
-    {
-        return view('home',["msg"=>"Hello! I am editor"]);
-    }
-
 
     /**
      * Show the application dashboard.
@@ -44,6 +43,8 @@ class HomeController extends Controller
      */
     public function adminHome()
     {
-        return view('..Admin.A-dashboard',["msg"=>"Hello! I am admin"]);
+        return view('..Team/T-dashboard');
     }
+
+
 }

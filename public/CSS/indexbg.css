@@ -1,5 +1,5 @@
 body .bbbootstrap {
-    background-image: url(../images/indeximages/search.jpg) !important;
+  
     background-size: cover;
     background-position: center;
     padding: 335px 0 30px 0;
@@ -18,7 +18,12 @@ body .bbbootstrap {
 
 .bbbootstrap form {
     position: relative;
-    width: 540px;
+    width: auto;
+    margin: 22px auto 0;
+}
+.bbbbootstrap form {
+    position: relative;
+    width: auto;
     margin: 22px auto 0;
 }
 .headings{
@@ -44,6 +49,12 @@ span {
 
 
 .bbbootstrap form input[type="text"] {
+    padding: 15px 20px;
+    padding-right: 100px;
+    border-color: transparent;
+    border-radius: 4px;
+}
+.bbbbootstrap form input[type="text"] {
     padding: 15px 20px;
     padding-right: 100px;
     border-color: transparent;
@@ -82,9 +93,16 @@ input[type=text] {
     float: right;
     padding: 10px 25px;
 }
+.bbbbootstrap form input[type="submit"] {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    float: right;
+    padding: 10px 25px;
+}
 
 body .Button, body .button {
-    background-color: #1268b3;
+    background-color: rgb(86, 174, 253);
     background-image: none;
 }
 
@@ -116,7 +134,7 @@ input[type="submit"] {
     transition: box-shadow 50ms, -webkit-box-shadow 50ms;
     -webkit-font-smoothing: inherit;
     color: #fff;
-    background-color: #2e9df7;
+    background-color: rgba(46, 157, 247, 0.89);
     background-repeat: repeat-x;
     background-color: #38a2f7;
     background-image: -webkit-linear-gradient(#38a2f7, #2498f7);
@@ -142,18 +160,41 @@ input[type="submit"] {
 
 }
 .gal img{ width: 100%; padding: 7px 0;border-radius: 20px;}
-@media (max-width: 300px) {
 
+/**for Extra small phones**/
+@media(max-width:375px) {
     .gal {
 
 
-        -webkit-column-count: 1; /* Chrome, Safari, Opera */
-        -moz-column-count: 1; /* Firefox */
+        -webkit-column-count: 2; /* Chrome, Safari, Opera */
+        -moz-column-count: 2; /* Firefox */
         column-count: 1;
 
+    }
+}
+    /**for normal phones */
+    @media(min-width:376px) and (max-width:575px){
 
+        .gal {
+
+
+            -webkit-column-count: 2; /* Chrome, Safari, Opera */
+            -moz-column-count: 2; /* Firefox */
+            column-count: 2;
+
+        }
     }
 
-}
+    /**for large mobiles*/
+    @media(min-width:576px) and (max-width:567px) {
+        .gal {
 
-/*watermark css*/
+
+            -webkit-column-count: 2; /* Chrome, Safari, Opera */
+            -moz-column-count: 2; /* Firefox */
+            column-count: 2;
+
+        }
+    }
+
+

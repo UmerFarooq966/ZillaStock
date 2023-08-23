@@ -6,11 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Cashier\Billable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
+    use Billable;
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
@@ -54,7 +56,37 @@ class User extends Authenticatable
     protected function role(): Attribute
     {
         return new Attribute(
-            get: fn ($value) =>  ["user", "editor", "admin"][$value],
+            get: fn ($value) =>  ["user", "team", "admin"][$value],
         );
     }
+
+
+    public function UserProfile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
+
+    public function favourites()
+    {
+        return $this->hasMany(Favourite::class);
+    }
+
+    public function cartItems()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
+    // User.php
+
+    // Relationship with purchases
+    public function purchases()
+    {
+        return $this->hasMany(Purchase::class, 'user_id');
+    }
+
+    // Relationship with seller balances
+    public function sellerBalance()
+    {
+        return $this->hasOne(SellerBalance::class, 'seller_id');
+    }
+
 }

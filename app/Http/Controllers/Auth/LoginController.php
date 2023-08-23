@@ -49,16 +49,33 @@ class LoginController extends Controller
 
         ]);
 
+        /*
+         *
+         *  $input = $request->all();
+
+        $input = $this->validate($request, [
+            'email' => 'required|email',
+            'password' => 'required',
+
+        ]);
+
+        $email = $input['email'];
+        $password = $input['password'];
+
+        if(auth()->attempt($email, $password))
+        {
+         */
+
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
 
             if (auth()->user()->role == 'admin')
             {
-                return redirect()->route('admin.home');
+                return redirect()->route('Admin.home');
             }
-            else if (auth()->user()->role == 'editor')
+            else if (auth()->user()->role == 'team')
             {
-                return redirect()->route('editor.home');
+                return redirect()->route('team.Teamhome');
             }
             else
             {

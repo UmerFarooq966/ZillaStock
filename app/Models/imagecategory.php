@@ -9,4 +9,10 @@ class imagecategory extends Model
 {
     use HasFactory;
    protected $fillable = ['type'];
+
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'catid');
+    }
+
 }
